@@ -1,0 +1,179 @@
+html, body {
+  background-color: #fff;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  color: #333;
+  font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #0366d6;
+}
+
+pre, code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, "Microsoft YaHei";
+}
+
+code {
+  color: #d03bc8;
+  padding: 0.1em 0.4em;
+  margin: 0;
+  background-color: rgba(111, 66, 193, 0.07);
+  border-radius: 3px;
+}
+
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.text-center {
+  text-align: center;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, dl, dd, ul, ol, form, input, textarea, th, td, select {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+small {
+  font-size: 14px;
+}
+
+em, i {
+  font-style: normal;
+}
+
+ul, ol, dl {
+  list-style: none;
+}
+
+ul, li {
+  list-style-type: none;
+  list-style-image: none;
+}
+
+a {
+  text-decoration: none;
+  border: none;
+}
+
+img {
+  border: none;
+  vertical-align: top;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+input, textarea {
+  font-size: 12px;
+  outline: none;
+}
+
+textarea {
+  resize: none;
+  overflow: auto;
+}
+
+.area {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.display {
+  display: flex;
+}
+
+.align {
+  align-items: center;
+}
+
+.justify {
+  justify-content: center;
+}
+
+.color {
+  color: #3753B7;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #3753B7;
+}
+
+.el-table .el-table__header thead th {
+  background: #EAEFFF
+}
+
+.el-table .el-table__header {
+  border-top: 2px solid #3854B8;
+}
+
+.el-table thead {
+  color: #333;
+}
+
+.el-table--striped .el-table__body tr.el-table__row--striped td {
+  background-color: #F7F8FB;
+}
+
+.el-table__body {
+  border-left: 1px solid #EAEFFF;
+  border-right: 1px solid #EAEFFF;
+  border-bottom: 1px solid #EAEFFF;
+}
+
+.el-table td, .el-table th {
+  padding: 9px 0;
+}
+
+.el-input__inner {
+  height: 32px;
+  line-height: 32px;
+  border-radius: 0;
+}
+
+.el-input__icon {
+  line-height: 32px;
+}
+
+.el-input {
+  width: auto;
+}
+
+.el-select-dropdown__item {
+  line-height: 24px;
+  height: 24px;
+}
+
+.el-table__body-wrapper {
+  height: calc(100% - 42px);
+}
+
+.el-dialog__header {
+  padding: 0;
+}
+
+.el-dialog__body {
+  padding: 0;
+}
+
+.el-table th>.cell {
+  text-align: center;
+}
