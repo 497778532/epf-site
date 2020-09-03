@@ -39,8 +39,21 @@
           </span>
         </div>
         <div class="tr-right display align">
+          <template v-if="no==='003001'||no==='004001'">
+            <div class="state end"
+                 v-if="item.status_name==='已结束'">
+              {{item.status_name}}
+            </div>
+            <div class="state warning"
+                 v-if="item.status_name==='进行中'">
+              {{item.status_name}}
+            </div>
+          </template>
+          <div class="date">
+            {{item.info_time2}}
+          </div>
 
-          <div class="state success"
+          <!-- <div class="state success"
                v-if="item.trade_status===2">
             已成交
           </div>
@@ -56,9 +69,7 @@
                v-if="item.trade_status===3">
             已流拍
           </div>
-          <div class="date">
-            {{item.info_time2}}
-          </div>
+        -->
 
         </div>
       </div>
@@ -105,7 +116,7 @@ export default {
   },
   data () {
     return {
-
+      no: '',
       activeName: '',
       loading: false,
       tableHead: [{ title: '公告编号', prop: 'notice_no' },
@@ -149,6 +160,8 @@ export default {
       this.activeName = item.name
       this.getTabHead(item.no)
       this.getList(item.no)
+      this.no = item.no
+
     },
     jump (item) {
       // this.$store.commit('delete_keepAlive')
@@ -164,6 +177,8 @@ export default {
           //土地及矿业权的交易公告
           this.tableHead = [
             { title: '公告编号', prop: 'name' },
+
+            { title: '宗地编号', prop: 'trade_no' },
             { title: '公告时间', prop: 'info_time2' },
             { title: '起始价', prop: 'begin_price' },
             { title: '保证金', prop: 'earnest_money' },
@@ -185,6 +200,7 @@ export default {
           //土地及矿业权的变更公告
           this.tableHead = [
             { title: '公告编号', prop: 'name' },
+
             { title: '宗地编号', prop: 'trade_no' },
             { title: '公告类型', prop: 'type' },
             { title: '公告时间', prop: 'info_time2' },
@@ -247,6 +263,7 @@ export default {
     'data.children': function (val) {
       this.getTabHead(val[0].no)
       this.getList(val[0].no)
+      this.no = val[0].no
       this.activeName = JSON.parse(JSON.stringify(val[0].name))
 
     }

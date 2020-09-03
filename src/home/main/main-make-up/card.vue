@@ -5,7 +5,7 @@
 
       <div class="appeal-head display align">
         <span>
-          揭阳市纪委第三派驻纪检组
+          {{data[0].lvalue}}
         </span>
         <span @click="close('appeal')">
           <img src="@/assets/image/home/close2.png"
@@ -14,7 +14,12 @@
       </div>
 
       <div class="appeal-contain">
-        <div>
+        <div v-for="(item,index) in data[0].child"
+             :key="index">
+          <span>{{item.lvalue}}</span>
+          <span>{{item.mvalue}}</span>
+        </div>
+        <!-- <div>
           <span>举报电话</span>
           <span>0663-8339608</span>
         </div>
@@ -30,7 +35,7 @@
         <div>
           <span>邮政编码</span>
           <span>522010</span>
-        </div>
+        </div> -->
       </div>
 
     </div>
@@ -38,7 +43,7 @@
          v-if="$store.state.card.tender">
       <div class="appeal-head display align">
         <span>
-          揭阳市工程项目招投标
+          {{data[1].lvalue}}
         </span>
         <span @click="close('tender')">
           <img src="@/assets/image/home/close2.png"
@@ -47,17 +52,16 @@
       </div>
 
       <div class="tender-contain">
-        <div style="color:#343434">
-          <span>领域营商环境</span>
-          <span>专项整治线索征集</span>
-        </div>
-        <div>
-          <span class="img"><img src="@/assets/image/home/email.png"
+        <div style="color:#343434"
+             v-for="(item,index) in data[1].child"
+             :key="index">
+          <span class="img"
+                v-if="/@/.test(item.mvalue)"><img src="@/assets/image/home/email.png"
                  alt=""></span>
-          <span class="email">
-            jyggzyzhb@163.com
-          </span>
+          {{item.mvalue}}
+
         </div>
+
       </div>
     </div>
   </div>
@@ -69,13 +73,47 @@ export default {
     return {
       myTender: true,
       appeal: true,
+      data: []
 
     }
   },
   methods: {
     close (key) {
       this.$store.commit('close_card', key)
+    },
+    getData () {
+      this.$get(
+        '/ords/epfcms/param/queryParamRightInfo',
+        {}
+      ).then(res => {
+        let data = res.items;
+        let arr = []
+        for (var i = 0; i < data.length; i++) {
+          let temp = data[i]
+          if (!temp.parent_id) {
+            arr.push(temp)
+          }
+        }
+
+        for (var j = 0; j < arr.length; j++) {
+
+          let item = arr[j]
+          item.child = []
+          for (var k = 0; k < data.length; k++) {
+            if (eval(`/${item.id}/`).test(data[k].id) && item.id !== data[k].id) {
+              item.child.push(data[k])
+            }
+          }
+
+        }
+        this.data = arr
+
+      })
     }
+
+  },
+  created () {
+    this.getData()
   }
 }
 </script>
