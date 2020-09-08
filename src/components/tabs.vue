@@ -28,11 +28,11 @@
            :key="index"
            @click="toDetail(item)">
         <div class="tr-left">
-          <span v-if="data.no==='003'&&item.info1">
-            【{{item.info1}}】
+          <span v-if="data.no==='003'&&item.target_type">
+            【{{item.target_type}}】
           </span>
-          <span v-if="data.no==='004'&&item.info2">
-            【{{item.info2}}】
+          <span v-if="data.no==='004'&&item.target_type">
+            【{{item.target_type}}】
           </span>
           <span v-html="item.name">
 
@@ -133,12 +133,31 @@ export default {
   },
   methods: {
     toDetail (item) {
-
+      if (item.item_type === 1) {
+        this.getData(item.id)
+        return
+      }
       const { href } = this.$router.resolve({
         path: `noticeDetail`,
         query: { name: item.name, id: item.id }
       });
       window.open(href, "_blank");
+    },
+    getData (id) {
+
+      this.$get(
+        '/ords/epfcms/cmsItem/queryCmsItemDetails/' + id,
+        {}
+      ).then(res => {
+        let data = res.items[0] || ''
+
+        if (!data) {
+          return
+
+        }
+
+        window.open(data.url);
+      })
     },
     tabletoDetail (row, item) {
 

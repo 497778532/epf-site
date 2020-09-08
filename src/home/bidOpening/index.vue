@@ -16,11 +16,11 @@
             <el-date-picker v-model="date"
                             type="daterange"
                             @change="change"
-                            unlink-panels
                             range-separator="至"
                             start-placeholder="开始日期"
                             end-placeholder="结束日期"
                             value-format="yyyy-MM-dd"></el-date-picker>
+
           </div>
           <div class="display align">
             <span>区域：</span>
@@ -133,7 +133,7 @@ export default {
   created () {
     let time = new Date();
     this.date = [
-      this.formatDateTime(time - 24 * 60 * 60 * 1000),
+      this.formatDateTime(time - 7 * 24 * 60 * 60 * 1000),
       this.formatDateTime(time),
     ];
     let url = this.url;
@@ -188,13 +188,14 @@ export default {
           return;
         }
         this.cantonData = res.data.items;
+        this.cantonData.unshift({ name: '请选择', id: '' })
       });
     },
     //重置
     resetData () {
       let time = new Date();
       this.date = [
-        this.formatDateTime(time - 24 * 60 * 60 * 1000),
+        this.formatDateTime(time - 7 * 24 * 60 * 60 * 1000),
         this.formatDateTime(time),
       ];
       this.params = {
@@ -316,10 +317,11 @@ export default {
 </style>
 
 <style>
-.search .el-date-editor .el-range-separator {
+.bidOpening .el-date-editor .el-range__icon {
   line-height: 25px;
 }
-.search .el-input__icon {
-  line-height: 22px;
+
+.bidOpening .el-date-editor .el-range-separator {
+  line-height: 25px;
 }
 </style>

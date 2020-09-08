@@ -27,15 +27,16 @@
           <div class="a-twoTr">{{item.answer_consult}}</div>
         </div>
       </div>
-      <div class="page display">
-        <epf-page :pre="pre"
-                  :next="next"
-                  @pre-click="prevClick"
-                  @next-click="nextClick"
-                  :url="url"></epf-page>
-      </div>
-    </div>
 
+    </div>
+    <div class="page display"
+         style="padding-right:10px">
+      <epf-page :pre="pre"
+                :next="next"
+                @pre-click="prevClick"
+                @next-click="nextClick"
+                :url="url"></epf-page>
+    </div>
     <div v-if="!data.length"
          class="noData display align justify">
       <div style="text-align:center">
@@ -94,7 +95,7 @@
                       v-model="form.consult"></el-input>
           </el-form-item>
 
-          <el-form-item label="附件">
+          <!-- <el-form-item label="附件">
             <el-upload class="upload-demo"
                        action="https://jsonplaceholder.typicode.com/posts/"
                        :on-preview="handlePreview"
@@ -106,7 +107,7 @@
               <span slot="tip"
                     class="load-tip">(文件不得超过2M,支持.doc,pdf,.jpg)</span>
             </el-upload>
-          </el-form-item>
+          </el-form-item> -->
         </el-form>
       </div>
       <span slot="footer"
@@ -181,6 +182,7 @@ export default {
             return;
           }
           this.$message.success('提交成功')
+          this.form = this.$options.data().form
         });
     },
     handleRemove (file, fileList) {
@@ -247,7 +249,7 @@ export default {
 .q-title {
   font-size: 16px;
   line-height: 24px;
-  height: 24px;
+
   color: #000000;
 }
 .q-file {

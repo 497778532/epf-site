@@ -59,7 +59,6 @@
                 v-if="/@/.test(item.mvalue)"><img src="@/assets/image/home/email.png"
                  alt=""></span>
           {{item.mvalue}}
-
         </div>
 
       </div>

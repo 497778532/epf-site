@@ -88,7 +88,27 @@ export default {
     }
   },
   methods: {
+    getData (id) {
+
+      this.$get(
+        '/ords/epfcms/cmsItem/queryCmsItemDetails/' + id,
+        {}
+      ).then(res => {
+        let data = res.items[0] || ''
+
+        if (!data) {
+          return
+
+        }
+
+        window.open(data.url);
+      })
+    },
     toDetail (item) {
+      if (item.item_type === 1) {
+        this.getData(item.id)
+        return
+      }
       const { href } = this.$router.resolve({
         path: `noticeDetail`,
         query: { name: item.name, id: item.id }
