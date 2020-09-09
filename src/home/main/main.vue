@@ -230,7 +230,7 @@ export default {
         { name: '互认平台登录', url: require('@/assets/image/home/push5.png') },
         { name: '中介服务超市', url: require('@/assets/image/home/push6.png') },
         { name: '近期开标', url: require('@/assets/image/home/push7.png') },
-        { name: '内部登录', url: require('@/assets/image/home/push8.png') },
+        { name: '工作人员登录', url: require('@/assets/image/home/push8.png') },
       ],
       loading1: false,
       i: 0,
