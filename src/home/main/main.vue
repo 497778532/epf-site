@@ -285,7 +285,7 @@ export default {
       }
     },
     jumpGovernment (item) {
-      window.open('http://121.11.160.122:9002/sso/')
+      window.open('http://121.11.160.122:9002/sso/ssosysuser/ssologin.html?netType=0')
       // let params = {
       //   path: '/government?name=' + item.name,
       //   name: item.name

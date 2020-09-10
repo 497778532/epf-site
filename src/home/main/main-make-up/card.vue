@@ -1,5 +1,25 @@
 <template>
   <div class="card">
+    <div class="fixed-contain">
+      <div class="one display align justify"
+           v-for="(item,index) in data"
+           :key="index">
+        <div style="text-aling:center">
+          <div class="display justify">
+            <img :src="item.url"
+                 alt="">
+          </div>
+          <div class="fix-text">
+            {{item.name}}
+          </div>
+        </div>
+        <div class="hover-one none">
+          {{item.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="card">
     <div class="appeal"
          v-if="$store.state.card.appeal">
 
@@ -19,23 +39,7 @@
           <span>{{item.lvalue}}</span>
           <span>{{item.mvalue}}</span>
         </div>
-        <!-- <div>
-          <span>举报电话</span>
-          <span>0663-8339608</span>
-        </div>
-        <div>
-          <span>电子邮箱</span>
-          <span>jysjw3z@163.com</span>
-        </div>
-        <div>
-          <span>通讯地址</span>
-          <span> 揭阳市临江北路市委大院市纪委第三派驻纪检组</span>
-        </div>
 
-        <div>
-          <span>邮政编码</span>
-          <span>522010</span>
-        </div> -->
       </div>
 
     </div>
@@ -63,7 +67,7 @@
 
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -72,7 +76,12 @@ export default {
     return {
       myTender: true,
       appeal: true,
-      data: []
+      data: [
+        { name: '举报电话', url: require('@/assets/image/home/fix0.png') },
+        { name: '电子邮箱', url: require('@/assets/image/home/fix1.png') },
+        { name: '通讯地址', url: require('@/assets/image/home/fix2.png') },
+        { name: '邮政编码', url: require('@/assets/image/home/fix3.png') },
+        { name: '投诉邮箱', url: require('@/assets/image/home/fix4.png') }]
 
     }
   },
@@ -85,27 +94,7 @@ export default {
         '/ords/epfcms/param/queryParamRightInfo',
         {}
       ).then(res => {
-        let data = res.items;
-        let arr = []
-        for (var i = 0; i < data.length; i++) {
-          let temp = data[i]
-          if (!temp.parent_id) {
-            arr.push(temp)
-          }
-        }
 
-        for (var j = 0; j < arr.length; j++) {
-
-          let item = arr[j]
-          item.child = []
-          for (var k = 0; k < data.length; k++) {
-            if (eval(`/${item.id}/`).test(data[k].id) && item.id !== data[k].id) {
-              item.child.push(data[k])
-            }
-          }
-
-        }
-        this.data = arr
 
       })
     }
@@ -124,115 +113,53 @@ export default {
   top: 22px;
   right: 0;
 }
-.appeal {
-  width: 220px;
-  height: 260px;
-}
-.appeal-head {
-  height: 40px;
-  justify-content: space-between;
-  padding: 0 14px;
-  background: rgba(61, 161, 237, 1);
-  color: #fff;
-  border-radius: 4px 4px 0px 0px;
-}
-.appeal-contain {
-  background: rgba(255, 255, 255, 1);
-  padding: 14px;
-  border: 1px solid rgba(61, 161, 237, 1);
-  border-radius: 0px 0px 4px 4px;
-}
-.appeal-contain > div {
-  margin-top: 14px;
-}
-.appeal-contain > div:nth-child(1) {
-  margin-top: 0;
-}
-
-.appeal-contain > div > span:nth-child(1) {
-  display: inline-block;
+.one {
   width: 70px;
-  height: 32px;
-  line-height: 32px;
-  text-align: center;
-  background: #3da1ed;
-  color: #fff;
+  height: 70px;
+  cursor: pointer;
+  background: #ffffff;
+  border-left: 1px solid #eaeaea;
+  border-right: 1px solid #eaeaea;
+  border-top: 1px solid #eaeaea;
+  box-shadow: 1px 2px 5px 0px rgba(216, 212, 212, 0.59);
+  position: relative;
 }
 
-.appeal-contain > div > span:nth-child(2) {
-  color: #000;
-  margin-left: 3px;
+.one:hover .hover-one {
+  display: block;
 }
-
-.tender {
-  width: 220px;
-  height: 114px;
-  margin-top: 30px;
-
-  border-radius: 4px;
-  color: #000;
-  background-color: #fff;
-  border-top: none;
+.one:last-child {
+  border-bottom: 1px solid #eaeaea;
 }
-
-.tender-contain {
-  padding: 16px 8px;
-  background: #fff;
-
-  border: 1px solid rgba(61, 161, 237, 1);
-  border-radius: 0px 0px 4px 4px;
-}
-.tender-contain > div:nth-child(1) > span:nth-child(2) {
-  /* margin-left: 5px; */
-}
-.tender-contain > div:nth-child(2) {
+.fix-text {
   margin-top: 10px;
+  color: #474747;
 }
-.email {
-  /* margin-left: 10px; */
+.none {
+  display: none;
+}
+.hover-one {
+  width: 152px;
+  min-height: 70px;
+  background: #fff;
+  box-shadow: 1px 3px 7px 1px rgba(184, 218, 254, 0.7);
+  border-radius: 4px;
+  position: absolute;
+  left: -160px;
+  top: 0;
+  padding: 10px 7px;
 }
 
-/* @media screen and (max-width: 1824px) {
-  .card {
-    right: 0;
-  }
-  .appeal,
-  .tender {
-    width: 130px;
-    overflow: hidden;
-    height: auto;
-    font-size: 12px;
-  }
-  .tender-contain {
-    padding: 8px 6px;
-  }
-  .tender-contain > div:nth-child(1) > span {
-    display: block;
-  }
-  .tender-contain > div:nth-child(1) > span:nth-child(2) {
-    margin-left: 0;
-  }
-
-  .tender-contain > div:nth-child(2) {
-    margin-top: 10px;
-  }
-  .appeal-contain > div > span:nth-child(1) {
-    display: inline;
-    width: auto;
-    height: auto;
-    line-height: normal;
-    background: #fff;
-    color: #000;
-  }
-  .img {
-    text-align: center;
-    display: block;
-  }
-  .appeal-head {
-    font-size: 12px;
-  }
-  .email {
-    margin-left: 0;
-  }
-} */
+.hover-one::after {
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-left: 12px solid #fff;
+  border-bottom: 7px solid transparent;
+  content: "";
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  margin-top: -6px;
+}
 </style>

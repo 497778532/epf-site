@@ -7,6 +7,7 @@ Router.prototype.push = function push (location) {
 import pdf from '@/home/login/pdf'
 import home from '@/home/index'
 import main from '@/home/main/main'
+import cityMap from '@/home/main/main-make-up/cityMap'
 import notice from '@/home/notice/notice'
 import noticeDetail from '@/home/notice/noticeDetail'
 import noticeTable from '@/home/notice/noticeTable'
@@ -41,14 +42,14 @@ export default new Router({
           component: main
         },
         {
+          path: '/cityMap',
+          name: 'cityMap',
+          component: cityMap
+        },
+        {
           path: '/bidOpening',
           name: 'bidOpening',
           component: bidOpening,
-        },
-        {
-          path: '/complaints',
-          name: 'complaints',
-          component: complaints,
         },
 
         {
@@ -76,7 +77,7 @@ export default new Router({
 
                   break;
                 case '投诉举报':
-                  url = '/complaints'
+                  url = '/answer'
 
                   break;
 
@@ -100,6 +101,11 @@ export default new Router({
 
               },
             },
+            // {
+            //   path: '/complaints',
+            //   name: 'complaints',
+            //   component: complaints,
+            // },
 
             {
               path: '/answer',

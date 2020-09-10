@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="transaction w">
+    <!-- <div class="transaction w">
       <epf-title :title="'交易数据'"></epf-title>
       <div class="tran_bd">
         <div class="statistics tran_box">
@@ -62,7 +62,7 @@
           <proportion></proportion>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="guide w">
       <epf-title :title="'办事指南'"></epf-title>
       <div class="guide_bd">
@@ -81,13 +81,13 @@
             </li>
           </ul>
         </div>
-        <div class="guide_bdright">
-          <a href="http://map.baidu.com/?shareurl=1&poiShareUid=698694a64b97c98f1ef74dfc"
-             target="_blank">
-            <img src="@/assets/image/home/map.jpg"
-                 style="width:100%;height:240px"
-                 alt />
-          </a>
+        <div class="guide_bdright"
+             @click="toMap">
+
+          <img src="@/assets/image/home/map.jpg"
+               style="width:100%;height:240px"
+               alt />
+
         </div>
       </div>
     </div>
@@ -146,6 +146,9 @@ export default {
     this.toDoQuery();
   },
   methods: {
+    toMap () {
+      this.$router.push('cityMap')
+    },
     over (item, index) {
       let num = index + 1;
       item.url = require("@/assets/image/home/todo" + num + "B.png");
@@ -156,10 +159,7 @@ export default {
     },
 
     jump (item) {
-      if (item.name === "投诉举报") {
-        window.open("http://www.gdzwfw.gov.cn/portal/index");
-        return
-      }
+
 
       let params = {
         path: "/notice",

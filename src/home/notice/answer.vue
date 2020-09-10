@@ -54,8 +54,8 @@
     </div>
 
     <el-dialog :visible.sync="dialogVisible"
-               width="35%"
-               :show-close="false">
+               :show-close="false"
+               width="35%">
       <template slot="title">
         <div class="dialog-title display align">
           <span class="title-text">我要咨询</span>
@@ -64,16 +64,34 @@
         </div>
       </template>
       <div class="form-contain">
-        <el-form ref="ownerForm"
+        <el-form ref="ownerForm0"
                  :model="form"
-                 label-width="80px">
-          <el-form-item label="咨询人">
+                 label-width="100px"
+                 :rules="formrules">
+          <el-form-item label="咨询人"
+                        prop="ownerName">
             <el-input v-model="form.ownerName"
                       placeholder="请输入真实姓名"></el-input>
           </el-form-item>
-          <el-form-item label="联系电话">
+          <el-form-item label="联系电话"
+                        prop="ownerTel">
+            <el-input v-model="form.ownerTel"
+                      placeholder="请输入常用座机号，便于联系"></el-input>
+          </el-form-item>
+          <el-form-item label="手机号码"
+                        prop="ownerMobile">
             <el-input v-model="form.ownerMobile"
-                      placeholder="请输入常用手机号，便于联系"></el-input>
+                      placeholder="请输入准确的手机号码"></el-input>
+          </el-form-item>
+          <el-form-item label="短信验证码"
+                        class="code-contain"
+                        prop="code">
+            <el-input v-model="form.code"
+                      placeholder="请输入验证码"></el-input>
+
+            <div class="code">
+              获取验证码
+            </div>
           </el-form-item>
           <el-form-item label="身份证号"
                         prop="ownerIdno">
@@ -81,33 +99,36 @@
                       placeholder="请输入准确的身份证号"></el-input>
           </el-form-item>
 
-          <el-form-item label="咨询时间">
+          <el-form-item label="业务模块"
+                        prop="consultBusiness">
+            <el-select v-model="form.consultBusiness"
+                       placeholder="请选择">
+              <el-option v-for="item in business.children"
+                         :key="item.no"
+                         :label="item.name"
+                         :value="item.no">
+              </el-option>
+            </el-select>
+
+            <!-- <el-input v-model="form.ownerIdno"
+                      placeholder="请输入准确的身份证号"></el-input> -->
+          </el-form-item>
+
+          <el-form-item label="咨询时间"
+                        prop="consultTime">
             <el-date-picker type="date"
                             value-format="yyyy-MM-dd"
                             placeholder="选择日期"
                             v-model="form.consultTime"
                             style="width:100%;"></el-date-picker>
           </el-form-item>
-          <el-form-item label="咨询内容">
+          <el-form-item label="咨询内容"
+                        prop="consult">
             <el-input type="textarea"
                       :rows="4"
                       placeholder="请完整的表述问题"
                       v-model="form.consult"></el-input>
           </el-form-item>
-
-          <!-- <el-form-item label="附件">
-            <el-upload class="upload-demo"
-                       action="https://jsonplaceholder.typicode.com/posts/"
-                       :on-preview="handlePreview"
-                       :on-remove="handleRemove"
-                       :before-remove="beforeRemove"
-                       multiple
-                       :limit="3">
-              <div class="upload">选择附件</div>
-              <span slot="tip"
-                    class="load-tip">(文件不得超过2M,支持.doc,pdf,.jpg)</span>
-            </el-upload>
-          </el-form-item> -->
         </el-form>
       </div>
       <span slot="footer"
@@ -120,10 +141,113 @@
       </span>
       <!--  -->
     </el-dialog>
+
+    <el-dialog :visible.sync="dialogVisible2"
+               :show-close="false"
+               width="35%">
+      <template slot="title">
+        <div class="dialog-title display align">
+          <span class="title-text">我要投诉</span>
+          <span class="el-icon-circle-close title-icon"
+                @click="dialogVisible2 = false"></span>
+        </div>
+      </template>
+      <div class="form-contain">
+        <el-form ref="ownerForm1"
+                 :model="form"
+                 label-width="100px"
+                 :rules="formrules">
+          <el-form-item label="联系人"
+                        prop="ownerName">
+            <el-input v-model="form.ownerName"
+                      placeholder="请输入真实姓名"></el-input>
+          </el-form-item>
+          <el-form-item label="联系电话"
+                        prop="ownerTel">
+            <el-input v-model="form.ownerTel"
+                      placeholder="请输入常用座机号，便于联系"></el-input>
+          </el-form-item>
+          <el-form-item label="手机号码"
+                        prop="ownerMobile">
+            <el-input v-model="form.ownerMobile"
+                      placeholder="请输入准确的手机号码"></el-input>
+          </el-form-item>
+          <el-form-item label="短信验证码"
+                        class="code-contain"
+                        prop="code">
+            <el-input v-model="form.code"
+                      placeholder="请输入验证码"></el-input>
+
+            <div class="code">
+              获取验证码
+            </div>
+          </el-form-item>
+          <el-form-item label="身份证号"
+                        prop="ownerIdno">
+            <el-input v-model="form.ownerIdno"
+                      placeholder="请输入准确的身份证号"></el-input>
+          </el-form-item>
+
+          <el-form-item label="投诉内容"
+                        prop="consult">
+            <el-input type="textarea"
+                      :rows="4"
+                      placeholder="请完整的表述问题"
+                      v-model="form.consult"></el-input>
+          </el-form-item>
+
+        </el-form>
+      </div>
+      <span slot="footer"
+            class="footer display justify"
+            style="text-align:center">
+        <div class="button cancel"
+             @click="dialogVisible2 = false">取消</div>
+        <div class="button enter"
+             @click="submitRules">确定</div>
+      </span>
+      <!--  -->
+    </el-dialog>
   </div>
 </template>
 
 <script>
+
+let checkPhone = (rule, value, callback) => {
+  const phoneReg = /^1[3|4|5|7|8][0-9]{9}$/
+  if (!value) {
+    return callback(new Error('手机号码不能为空'))
+  }
+  setTimeout(() => {
+    if (!Number.isInteger(+value)) {
+      callback(new Error('请输入数字值'))
+    } else {
+      if (phoneReg.test(value)) {
+        callback()
+      } else {
+        callback(new Error('手机号码格式不正确'))
+      }
+    }
+  }, 100)
+}
+
+let checkOwnerIdno = (rule, value, callback) => {
+  const ownerIdno = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
+  if (!value) {
+    return callback(new Error('身份证号码不能为空'))
+  }
+  setTimeout(() => {
+    if (!Number.isInteger(+value)) {
+      callback(new Error('请输入数字值'))
+    } else {
+      if (ownerIdno.test(value)) {
+        callback()
+      } else {
+        callback(new Error('身份证号码格式不正确'))
+      }
+    }
+  }, 100)
+}
 export default {
   data () {
     return {
@@ -135,55 +259,139 @@ export default {
         ownerIdno: "",
         consultTime: "",
         consult: "",
+        consultBusiness: '',
+        code: '',
+        ownerTel: ''
       },
       pre: "",
+      dialogVisible2: false,
       next: "",
-      url: "/ords/epfcms/consult/queryConsultByQA",
+      url: "/ords/epfcms/consult/queryConsultByQA/0",
+      dic: "/ords/epfcms/param/queryParamAllByNo/consultBusinessConfig",
+      params: {
+        // consultType: 0
+      },
+      business: [],
+      formrules: {
+
+        ownerName: [
+          {
+            required: true,
+            message: '请输入真实的姓名',
+            trigger: 'blur',
+          },
+        ],
+        ownerMobile: [
+          {
+            required: true,
+            message: '请输入联系电话',
+            trigger: 'blur',
+
+
+          },
+          { validator: checkPhone, trigger: 'blur' },
+        ],
+        ownerIdno: [
+          {
+            required: true,
+            message: '请输入准确的身份证号',
+            trigger: 'blur'
+          },
+          { validator: checkOwnerIdno, trigger: 'blur' },
+        ],
+
+        consult: [
+          {
+            required: true,
+            message: '请完整的表述问题',
+            trigger: 'blur',
+          },
+        ],
+        consultTime: [
+          {
+            required: true,
+            message: '请选择日期',
+            trigger: 'change',
+          },
+        ],
+
+        code: [
+          {
+            required: true,
+            message: '请输入短信验证码',
+            trigger: 'blur',
+          },
+        ],
+        consultBusiness: [
+          {
+            required: true,
+            message: '请选择业务模块',
+            trigger: 'change',
+          },
+        ],
+
+      },
+
     };
   },
   created () {
+    let name = this.$route.query.name
+    if (name === '投诉举报') {
+      this.dialogVisible2 = true
+      this.consultType = '1'
+    } else {
+      this.consultType = '0'
+      this.dialogVisible2 = false
+    }
+    this.getDic()
     this.answerQuery(this.url);
   },
+  watch: {
+    $route (to, from) {
+      let name = to.query.name
+      if (name === '投诉举报') {
+        this.dialogVisible2 = true
+        this.consultType = '1'
+      } else {
+        this.dialogVisible2 = false
+        this.consultType = '0'
+      }
+    }
+  },
   methods: {
+    getDic () {
+      this.$get(this.dic, {}).then((res) => {
+        this.business = res[0]
+      });
+    },
     want () {
       this.dialogVisible = true;
     },
     submitRules () {
-
-      if (!this.form.ownerName) {
-        this.$message.error("咨询人不能为空");
-        return false;
-      }
-      if (!this.form.ownerMobile) {
-        this.$message.error("联系号码不能为空");
-        return false;
-      } else {
-        if (!/^1[3456789]\d{9}$/.test(this.form.ownerMobile)) {
-          this.$message.error("联系号码格式不正确");
-          return false;
-        }
-      }
-      if (this.form.ownerIdno) {
-        let p = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
-        if (!p.test(this.form.ownerIdno)) {
-          this.$message.error("身份证号码格式有误");
-          return false;
-        }
-      }
-      this.form['consult_type'] = '0'
+      this.form['allowPublish'] = '1'
+      this.form['consultType'] = this.consultType
       this.submit();
     },
     submit () {
-      this.dialogVisible = false;
-      this.$axios
-        .post("/api/ords/epfcms/consult/addConsult", this.form)
-        .then((res) => {
-          if (res.status !== 200) {
-            return;
-          }
-          this.$message.success('提交成功')
-          this.form = this.$options.data().form
-        });
+      this.$refs['ownerForm' + this.consultType].validate((valid) => {
+        if (valid) {
+          this.dialogVisible = false;
+          this.dialogVisible2 = false;
+          this.$axios
+            .post("/api/ords/epfcms/consult/addConsult", this.form)
+            .then((res) => {
+              if (res.status !== 200) {
+                return;
+              }
+              this.$message.success('提交成功')
+              this.form = this.$options.data().form
+            });
+        } else {
+
+          return false;
+        }
+      });
+
     },
     handleRemove (file, fileList) {
       console.log(file, fileList);
@@ -218,7 +426,17 @@ export default {
 .answer-one {
   margin-bottom: 20px;
 }
-
+.code {
+  display: inline-block;
+  width: 90px;
+  height: 32px;
+  background: #f7b751;
+  text-align: center;
+  line-height: 32px;
+  margin-left: 10px;
+  color: #ffffff;
+  cursor: pointer;
+}
 .a,
 .q {
   position: relative;
@@ -361,18 +579,26 @@ export default {
 
 <style>
 .answer .el-form-item {
-  margin-bottom: 14px;
+  margin-bottom: 11px;
 }
 
 .answer .el-form-item__label {
   color: #666666;
 }
 
-.answer .el-input {
+.answer .el-input,
+.answer .el-select {
   width: 100%;
 }
 .page {
   margin: 20px 0;
   justify-content: flex-end;
+}
+.answer .code-contain .el-input {
+  width: 120px;
+}
+
+.answer .el-form-item__error {
+  padding-top: 0;
 }
 </style>

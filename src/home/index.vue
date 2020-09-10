@@ -1,8 +1,9 @@
 <template>
   <div class="app">
     <myHeader></myHeader>
-    <div class="area">
-      <epf-nav v-show="path!=='/government'"></epf-nav>
+    <div class="area"
+         v-show="path!=='/government'&&path!=='/main'">
+      <epf-nav></epf-nav>
     </div>
     <keep-alive :include="$store.state.keepAlive">
       <router-view></router-view>

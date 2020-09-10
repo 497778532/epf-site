@@ -178,7 +178,7 @@ export default {
     },
     getWidth (item) {
       if (item.title === '土地位置' || item.title === '标的名称') {
-        return '400'
+        return '300'
       }
     },
     getTabHead (no) {
@@ -188,10 +188,14 @@ export default {
           //土地及矿业权的交易公告
           this.tableHead = [
             { title: '公告编号', prop: 'name' },
+
+            { title: '宗地编号', prop: 'trade_no' },
             { title: '公告时间', prop: 'info_time2' },
             { title: '起始价', prop: 'begin_price' },
             { title: '保证金', prop: 'earnest_money' },
-            { title: '土地位置', prop: 'address' },
+
+            { title: '保证金截止日期', prop: 'end_earnest_time' },
+            { title: '竞买申请截止日期', prop: 'end_apply_time' },
           ]
           break;
 
@@ -200,6 +204,8 @@ export default {
           this.tableHead = [
             { title: '公告编号', prop: 'name' },
             { title: '公告时间', prop: 'info_time2' },
+            { title: '保证金截止日期', prop: 'end_earnest_time' },
+            { title: '竞买申请截止日期', prop: 'end_apply_time' },
             { title: '起始价', prop: 'begin_price' },
             { title: '保证金', prop: 'earnest_money' },
             { title: '标的名称', prop: 'trade_name' },
@@ -438,10 +444,14 @@ export default {
             //土地及矿业权的交易公告
             this.tableHead = [
               { title: '公告编号', prop: 'name' },
+
+              { title: '宗地编号', prop: 'trade_no' },
               { title: '公告时间', prop: 'info_time2' },
               { title: '起始价', prop: 'begin_price' },
               { title: '保证金', prop: 'earnest_money' },
-              { title: '土地位置', prop: 'address' },
+
+              { title: '保证金截止日期', prop: 'end_earnest_time' },
+              { title: '竞买申请截止日期', prop: 'end_apply_time' },
             ]
             break;
           case '005006':
@@ -477,6 +487,8 @@ export default {
             this.tableHead = [
               { title: '公告编号', prop: 'name' },
               { title: '公告时间', prop: 'info_time2' },
+              { title: '保证金截止日期', prop: 'end_earnest_time' },
+              { title: '竞买申请截止日期', prop: 'end_apply_time' },
               { title: '起始价', prop: 'begin_price' },
               { title: '保证金', prop: 'earnest_money' },
               { title: '标的名称', prop: 'trade_name' },

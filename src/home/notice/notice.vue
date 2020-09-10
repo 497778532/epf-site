@@ -75,7 +75,7 @@ export default {
             { path: '/notice', query: { index: 3, id: '007005', name: '国有产权' } },
 
             { path: '/notice', query: { index: 3, id: '008005', name: '数字证书' } },
-            // { path: '/notice', query: { index: 3, id: '008006', name: '中介服务超市' } }
+
           ]
 
 
@@ -115,10 +115,7 @@ export default {
     },
     listClick (item) {
 
-      if (item.query.name === "投诉举报") {
-        window.open("http://www.gdzwfw.gov.cn/portal/index");
-        return
-      }
+
 
       this.active = item.query.id
       this.$router.push({ path: '/notice', query: item.query })

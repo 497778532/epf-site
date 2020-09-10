@@ -30,11 +30,12 @@
           <span>揭阳市政务服务中心6-7楼</span>
         </div>
 
-        <div>
-          <span>联系电话：:</span>
-          <span></span>
+        <div v-for="(item,index) in data.children"
+             :key="index">
+          <span>{{item.name}}：</span>
+          <span>{{item.value}}</span>
         </div>
-
+        <!-- 
         <div>
           <span>综合部：</span>
           <span>0663-1234567</span>
@@ -62,7 +63,7 @@
         <div>
           <span>土地及矿业权部：</span>
           <span>0663-1234567</span>
-        </div>
+        </div> -->
 
       </div>
     </div>
@@ -71,7 +72,29 @@
 
 <script>
 export default {
+  data () {
+    return {
+      data: {}
+    }
+  },
+  methods: {
+    getData (type) {
 
+      this.$get(
+        '/ords/epfcms/param/queryParamAllByNo/' + type,
+        {}
+      ).then(res => {
+        if (!res) {
+          return
+        }
+        this.data = res[0]
+
+      })
+    },
+  },
+  created () {
+    this.getData('contactCenterTelConfig')
+  }
 }
 </script>
 

@@ -201,7 +201,11 @@ export default {
             { title: '公告时间', prop: 'info_time2' },
             { title: '起始价', prop: 'begin_price' },
             { title: '保证金', prop: 'earnest_money' },
-            { title: '土地位置', prop: 'address' },
+
+            { title: '保证金截止日期', prop: 'end_earnest_time' },
+            { title: '竞买申请截止日期', prop: 'end_apply_time' },
+
+            // { title: '土地位置', prop: 'address' },
           ]
           break;
 
@@ -210,6 +214,8 @@ export default {
           this.tableHead = [
             { title: '公告编号', prop: 'name' },
             { title: '公告时间', prop: 'info_time2' },
+            { title: '保证金截止日期', prop: 'end_earnest_time' },
+            { title: '竞买申请截止日期', prop: 'end_apply_time' },
             { title: '起始价', prop: 'begin_price' },
             { title: '保证金', prop: 'earnest_money' },
             { title: '标的名称', prop: 'trade_name' },
