@@ -21,6 +21,9 @@ import 'element-ui/lib/theme-chalk/index.css';
 import "@/assets/css/reset.css";
 import epfTitle from '@/components/title'
 import epfNav from '@/components/nav'
+import scroll from 'vue-seamless-scroll'
+
+
 import epfPage from '@/components/page'
 import echarts from 'echarts' //引入echarts
 // import Print from 'vue-print-nb'
@@ -33,7 +36,7 @@ Vue.component("epfPage", epfPage);
 Vue.use(ElementUI);
 // Vue.use(VueQuillEditor)
 Vue.config.productionTip = false
-
+Vue.use(scroll)
 Vue.use(Print);
 Vue.prototype.$get = get;
 Vue.prototype.$post = post;

@@ -14,20 +14,13 @@
                  v-for="(item,index) in data"
                  :key="index">
               <div class="title">
-                财务部
+                {{item.name}}
               </div>
               <div class="content">
-                <div>
-                  <span>电话：</span>
-                  <span>1234567</span>
-                </div>
-                <div>
-                  <span>电话：</span>
-                  <span>1234567</span>
-                </div>
-                <div>
-                  <span>电话：</span>
-                  <span>1234567</span>
+                <div v-for="(tel,telIndex) in item.children"
+                     :key="telIndex">
+                  <span>{{tel.name}}：</span>
+                  <span>{{tel.lvalue}}</span>
                 </div>
 
               </div>
@@ -143,6 +136,7 @@ export default {
             aspectScale: 1,
             // center: [104.2978515625, 35.8544921875],
             label: {
+              show: false,
               emphasis: {
                 show: false
               }
@@ -152,9 +146,11 @@ export default {
               normal: {
                 color: "rgba(51, 69, 89, .5)", // 地图背景色
                 borderColor: "#516a89", // 省市边界线00fcff 516a89
-                borderWidth: 1
+                borderWidth: 1,
+
               },
               emphasis: {
+
                 color: "rgba(37, 43, 61, .5)" // 悬浮背景
               }
             }
@@ -184,6 +180,7 @@ export default {
                   borderColor: '#fff',
                 }, // 正常样式
                 emphasis: {
+
                   areaColor: '#fff',
                   borderWidth: 2,
                   borderColor: '#3854b8',
@@ -207,12 +204,12 @@ export default {
               type: 'effectScatter',
               coordinateSystem: 'geo',
               data: [
-                [116.37905, 23.558611, { name: '揭阳市公共资源交易中心', address: '新阳东路南100米揭阳市政务服务中心' }],
-                [116.300749, 23.034824, { name: '惠来县公共资源交易中心', address: '惠来县惠城镇南门西路21号(中国工商银行惠来支行9楼)' }],
+                [116.37905, 23.558611, { name: '揭阳市公共资源交易中心', address: '揭阳市政务服务中心6-7楼' }],
+                [116.300749, 23.034824, { name: '揭阳市公共资源交易中心惠来分中心', address: '惠来县惠城镇南门西路21号（中国工商银行惠来支行9楼）' }],
 
-                [115.862944, 23.451658, { name: '揭西县公共资源交易中心', address: '揭西县政务服务中心B栋2楼' }],
-                [116.16635, 23.326754, { name: '普宁市公共资源交易中心', address: '普宁市燎原东路群飞大厦' }],
-                [116.435667, 23.585745, { name: '揭东区公共资源交易中心', address: '揭东区政务服务中心3楼' }]
+                [115.862944, 23.451658, { name: '揭阳市公共资源交易中心揭西分中心', address: '揭西县政务服务中心B栋2楼' }],
+                [116.16635, 23.326754, { name: '揭阳市公共资源交易中心普宁分中心', address: '普宁市燎原街道群飞大厦7、8楼' }],
+                [116.435667, 23.585745, { name: '揭阳市公共资源交易中心揭东分中心', address: '揭东区公共服务中心三楼' }]
 
 
               ],
@@ -260,6 +257,20 @@ export default {
         alert('无法加载该地图')
       }
     },
+    getData () {
+
+      this.$get(
+        '/ords/epfcms/param/queryParamAllByNo/consultingService',
+        {}
+      ).then(res => {
+        if (!res) {
+          return
+        }
+        this.data = res[0].children
+
+      })
+    },
+
   },
   mounted () {
     this.$nextTick(function () {
@@ -271,6 +282,9 @@ export default {
       }, 200)
     })
   },
+  created () {
+    this.getData()
+  }
 }
 </script>
 <style scoped>
@@ -314,7 +328,6 @@ export default {
   font-size: 16px;
   font-weight: bold;
   color: #333333;
-  border-bottom: 1px solid #e5e5e5;
 }
 .content {
   padding: 0 15px;

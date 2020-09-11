@@ -115,17 +115,16 @@
           <img src="@/assets/image/home/laba.png"
                alt="">
         </div>
-        <div class="laba-content ">
-          <el-carousel height="26px"
-                       direction="vertical"
-                       :initial-index="0"
-                       indicator-position="none">
-            <el-carousel-item v-for="(item,index) in labaData"
-                              :key="index">
+        <div class="laba-content">
 
+          <div class="myCase">
+            <vue-seamless-scroll :data="labaData"
+                                 class="seamless-warp"
+                                 :class-option="optionSingleHeightTime">
               <div @click="toDetail(item)"
-                   class="display align"
-                   style="cursor:pointer">
+                   v-for="(item,index) in labaData"
+                   :key="index"
+                   class="display align dataOne">
 
                 <span class="write-pointer"></span>
                 <span class="account"
@@ -135,53 +134,10 @@
                 <span class="my-date">{{item.info_time2}}</span>
 
               </div>
-            </el-carousel-item>
+            </vue-seamless-scroll>
 
-          </el-carousel>
-          <el-carousel height="26px"
-                       direction="vertical"
-                       :initial-index="1"
-                       indicator-position="none">
-            <el-carousel-item v-for="(item,index) in labaData"
-                              :key="index">
+          </div>
 
-              <div @click="toDetail(item)"
-                   class="display align"
-                   style="cursor:pointer">
-
-                <span class="write-pointer"></span>
-                <span class="account"
-                      v-if="item.target_type">【{{item.target_type}}】</span>
-                <span class="text">{{item.name}}</span>
-
-                <span class="my-date">{{item.info_time2}}</span>
-
-              </div>
-            </el-carousel-item>
-
-          </el-carousel>
-          <el-carousel height="26px"
-                       direction="vertical"
-                       :initial-index="2"
-                       indicator-position="none">
-            <el-carousel-item v-for="(item,index) in labaData"
-                              :key="index">
-
-              <div @click="toDetail(item)"
-                   class="display align"
-                   style="cursor:pointer">
-
-                <span class="write-pointer"></span>
-                <span class="account"
-                      v-if="item.target_type">【{{item.target_type}}】</span>
-                <span class="text">{{item.name}}</span>
-
-                <span class="my-date">{{item.info_time2}}</span>
-
-              </div>
-            </el-carousel-item>
-
-          </el-carousel>
         </div>
       </div>
       <div class="second-step display">
@@ -359,6 +315,14 @@ export default {
   },
   mounted () {
 
+  },
+  computed: {
+    optionSingleHeightTime () {
+      return {
+        singleHeight: 27,
+        waitTime: 2500
+      }
+    }
   },
   methods: {
     getLaba (id) {
@@ -638,7 +602,7 @@ export default {
   text-overflow: ellipsis;
 }
 .title-right {
-  width: 80px;
+  width: 81px;
   color: #9a9a9a;
   margin-left: 30px;
   text-align: right;
@@ -798,8 +762,8 @@ export default {
 }
 
 .laba-content {
-  padding: 5px 0;
-  line-height: 21px;
+  /* padding: 4px 0; */
+  /* line-height: 21px; */
   padding-right: 30px;
   color: #ffffff;
   font-size: 12px;
@@ -815,6 +779,19 @@ export default {
 .my-date {
   margin-left: auto;
 }
+.dataOne {
+  height: 27px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.seamless-warp {
+  height: 80px;
+  overflow: hidden;
+}
+/* .myCase div {
+  float: left;
+} */
 </style>
 <style>
 .main .el-carousel__button {
