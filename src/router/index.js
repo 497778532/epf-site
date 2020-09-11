@@ -8,6 +8,7 @@ import pdf from '@/home/login/pdf'
 import home from '@/home/index'
 import main from '@/home/main/main'
 import cityMap from '@/home/main/main-make-up/cityMap'
+import phone from '@/home/main/main-make-up/phone'
 import notice from '@/home/notice/notice'
 import noticeDetail from '@/home/notice/noticeDetail'
 import noticeTable from '@/home/notice/noticeTable'
@@ -45,6 +46,11 @@ export default new Router({
           path: '/cityMap',
           name: 'cityMap',
           component: cityMap
+        },
+        {
+          path: '/phone',
+          name: 'phone',
+          component: phone
         },
         {
           path: '/bidOpening',

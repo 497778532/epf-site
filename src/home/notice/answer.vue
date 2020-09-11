@@ -48,6 +48,7 @@
       </div>
     </div>
     <div class="img-contain"
+         v-if="consultType==='0'"
          @click="want()">
       <img src="@/assets/image/home/question.png"
            alt />
@@ -271,6 +272,7 @@ export default {
       params: {
         // consultType: 0
       },
+      consultType: '0',
       business: [],
       formrules: {
 
