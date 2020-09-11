@@ -160,6 +160,7 @@ export default {
 
   top: 22px;
   right: 0;
+  z-index: 99999999;
 }
 .one {
   width: 70px;

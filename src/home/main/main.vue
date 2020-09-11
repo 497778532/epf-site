@@ -94,6 +94,8 @@
             <div v-for="(item,index) in server"
                  :key="index"
                  @click="serverJump(item)"
+                 @mouseover="over (item,index,'server') "
+                 @mouseout="out(item,index,'server')"
                  class="server-one display align justify">
               <div style="text-align:center">
 
@@ -391,6 +393,7 @@ export default {
       // this.$router.push('/government?name=' + item.name)
     },
     over (item, index, name) {
+
       let num = index + 1
       item.url = require('@/assets/image/home/' + name + num + 'B.png')
     },
@@ -653,6 +656,7 @@ export default {
   align-items: center;
   padding-top: 12px;
 }
+
 .logo-one > div {
   text-align: center;
 }
@@ -717,9 +721,13 @@ export default {
 .server-one {
   width: 50%;
   height: 75px;
+  color: #fff;
+}
+.server-one:hover {
+  color: rgba(255, 255, 255, 0.8);
 }
 .server-text {
-  color: #fff;
+  margin-top: 6px;
 }
 .new-step {
   width: 1200px;
