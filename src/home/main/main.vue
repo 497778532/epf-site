@@ -116,16 +116,60 @@
                alt="">
         </div>
         <div class="laba-content ">
-          <el-carousel height="80px"
+          <el-carousel height="26px"
                        direction="vertical"
+                       :initial-index="0"
                        indicator-position="none">
-            <el-carousel-item v-for="(alone,aloneIndex) in labaData"
-                              :key="aloneIndex">
+            <el-carousel-item v-for="(item,index) in labaData"
+                              :key="index">
 
-              <div v-for="(item,index) in alone"
-                   :key="index"
-                   @click="toDetail(item)"
-                   class="display align">
+              <div @click="toDetail(item)"
+                   class="display align"
+                   style="cursor:pointer">
+
+                <span class="write-pointer"></span>
+                <span class="account"
+                      v-if="item.target_type">【{{item.target_type}}】</span>
+                <span class="text">{{item.name}}</span>
+
+                <span class="my-date">{{item.info_time2}}</span>
+
+              </div>
+            </el-carousel-item>
+
+          </el-carousel>
+          <el-carousel height="26px"
+                       direction="vertical"
+                       :initial-index="1"
+                       indicator-position="none">
+            <el-carousel-item v-for="(item,index) in labaData"
+                              :key="index">
+
+              <div @click="toDetail(item)"
+                   class="display align"
+                   style="cursor:pointer">
+
+                <span class="write-pointer"></span>
+                <span class="account"
+                      v-if="item.target_type">【{{item.target_type}}】</span>
+                <span class="text">{{item.name}}</span>
+
+                <span class="my-date">{{item.info_time2}}</span>
+
+              </div>
+            </el-carousel-item>
+
+          </el-carousel>
+          <el-carousel height="26px"
+                       direction="vertical"
+                       :initial-index="2"
+                       indicator-position="none">
+            <el-carousel-item v-for="(item,index) in labaData"
+                              :key="index">
+
+              <div @click="toDetail(item)"
+                   class="display align"
+                   style="cursor:pointer">
 
                 <span class="write-pointer"></span>
                 <span class="account"
@@ -324,19 +368,19 @@ export default {
         {}
       ).then(res => {
         let data = res.items
-        let arr = []
-        let result = []
-        if (!data) {
-          return
-        }
-        for (let i = 0; i < data.length; i++) {
-          arr.push(data[i])
-          if (arr.length === 3) {
-            result.push(arr)
-            arr = []
-          }
-        }
-        this.labaData = result
+        // let arr = []
+        // let result = []
+        // if (!data) {
+        //   return
+        // }
+        // for (let i = 0; i < data.length; i++) {
+        //   arr.push(data[i])
+        //   if (arr.length === 3) {
+        //     result.push(arr)
+        //     arr = []
+        //   }
+        // }
+        this.labaData = data
       })
     },
 
