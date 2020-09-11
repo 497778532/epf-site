@@ -80,10 +80,7 @@
                 stripe
                 border
                 style="width: 100%">
-        <el-table-column type='index'
-                         label="序号"
-                         width="50">
-        </el-table-column>
+
         <el-table-column v-for="(item,index) in tableHead"
                          :key="index"
                          :label="item.title"
@@ -197,13 +194,14 @@ export default {
           this.tableHead = [
             { title: '公告编号', prop: 'name' },
 
-            { title: '宗地编号', prop: 'trade_no' },
+            // { title: '宗地编号', prop: 'trade_no' },
             { title: '公告时间', prop: 'info_time2' },
-            { title: '起始价', prop: 'begin_price' },
-            { title: '保证金', prop: 'earnest_money' },
 
             { title: '保证金截止日期', prop: 'end_earnest_time' },
             { title: '竞买申请截止日期', prop: 'end_apply_time' },
+            { title: '起始价', prop: 'begin_price' },
+            { title: '保证金', prop: 'earnest_money' },
+
 
             // { title: '土地位置', prop: 'address' },
           ]
@@ -218,7 +216,7 @@ export default {
             { title: '竞买申请截止日期', prop: 'end_apply_time' },
             { title: '起始价', prop: 'begin_price' },
             { title: '保证金', prop: 'earnest_money' },
-            { title: '标的名称', prop: 'trade_name' },
+            // { title: '标的名称', prop: 'trade_name' },
           ]
           break;
         case '005007':

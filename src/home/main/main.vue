@@ -110,19 +110,21 @@
 
         </div>
       </div>
-      <el-carousel height="80px"
-                   direction="vertical"
-                   indicator-position="none">
-        <el-carousel-item v-for="(alone,aloneIndex) in labaData"
-                          :key="aloneIndex">
-          <div class="new-step display">
-            <div class="laba display align justify">
-              <img src="@/assets/image/home/laba.png"
-                   alt="">
-            </div>
-            <div class="laba-content ">
+      <div class="new-step display">
+        <div class="laba display align justify">
+          <img src="@/assets/image/home/laba.png"
+               alt="">
+        </div>
+        <div class="laba-content ">
+          <el-carousel height="80px"
+                       direction="vertical"
+                       indicator-position="none">
+            <el-carousel-item v-for="(alone,aloneIndex) in labaData"
+                              :key="aloneIndex">
+
               <div v-for="(item,index) in alone"
                    :key="index"
+                   @click="toDetail(item)"
                    class="display align">
 
                 <span class="write-pointer"></span>
@@ -131,12 +133,13 @@
                 <span class="text">{{item.name}}</span>
 
                 <span class="my-date">{{item.info_time2}}</span>
-              </div>
-            </div>
-          </div>
-        </el-carousel-item>
-      </el-carousel>
 
+              </div>
+            </el-carousel-item>
+
+          </el-carousel>
+        </div>
+      </div>
       <div class="second-step display">
 
         <div class="logo-push">
@@ -455,6 +458,8 @@ export default {
         path: `noticeDetail`,
         query: { name: item.name, id: item.id }
       });
+
+      console.log(123)
       window.open(href, "_blank");
     },
     getList (val) {
@@ -687,28 +692,36 @@ export default {
 }
 .logo-one.one:hover {
   background: #526cfc;
+  color: #fff;
 }
 .logo-one.two:hover {
   background: #ff6c22;
+  color: #fff;
 }
 .logo-one.three:hover {
   background: #6c4afb;
+  color: #fff;
 }
 .logo-one.four:hover {
   background: #46ccb4;
+  color: #fff;
 }
 
 .logo-one.five:hover {
   background: #1e84c8;
+  color: #fff;
 }
 .logo-one.six:hover {
   background: #487ae4;
+  color: #fff;
 }
 .logo-one.seven:hover {
   background: #f6882c;
+  color: #fff;
 }
 .logo-one.eight:hover {
   background: #4c90c8;
+  color: #fff;
 }
 .gd {
   background: url("../../assets/image/home/main3.png") center center no-repeat;
