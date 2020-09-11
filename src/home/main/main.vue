@@ -86,19 +86,61 @@
                @mouseover="over (item,index,'main') "
                @mouseout="out(item,index,'main')"
                :key="index">
+
             <img :src="item.url"
                  alt="登录">
+          </div>
+          <div class="gd display">
+            <div v-for="(item,index) in server"
+                 :key="index"
+                 @click="serverJump(item)"
+                 class="server-one display align justify">
+              <div style="text-align:center">
+
+                <img :src="item.url"
+                     alt="">
+                <div class="server-text">
+                  {{item.name}}
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>
       </div>
+      <el-carousel height="80px"
+                   direction="vertical"
+                   indicator-position="none">
+        <el-carousel-item v-for="(alone,aloneIndex) in labaData"
+                          :key="aloneIndex">
+          <div class="new-step display">
+            <div class="laba display align justify">
+              <img src="@/assets/image/home/laba.png"
+                   alt="">
+            </div>
+            <div class="laba-content ">
+              <div v-for="(item,index) in alone"
+                   :key="index"
+                   class="display align">
+
+                <span class="write-pointer"></span>
+                <span class="account"
+                      v-if="item.target_type">【{{item.target_type}}】</span>
+                <span class="text">{{item.name}}</span>
+
+                <span class="my-date">{{item.info_time2}}</span>
+              </div>
+            </div>
+          </div>
+        </el-carousel-item>
+      </el-carousel>
+
       <div class="second-step display">
-        <div class="logo-text">
-          揭阳市公共资源 电子交易平台
-        </div>
+
         <div class="logo-push">
           <div class="push-top display align">
             <div class="logo-one"
+                 :class="{'one':index===0,'two':index===1,'three':index===2,'four':index===3}"
                  @mouseover="over (item,index,'push') "
                  @mouseout="out(item,index,'push')"
                  v-for="(item,index) in logoDataTop"
@@ -119,7 +161,7 @@
           <div class="push-bottom display align">
 
             <div class="logo-one"
-                 :class="{'four':index===0,'five':index===1}"
+                 :class="{'five':index===0,'six':index===1,'seven':index===2,'eight':index==3}"
                  v-for="(item,index) in logoDataBottom"
                  @mouseover="over (item,index+4,'push') "
                  @mouseout="out(item,index+4,'push')"
@@ -135,6 +177,11 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="logo-text"
+             @click="people">
+          <img src="@/assets/image/home/people.png"
+               alt="">
         </div>
       </div>
       <div class="third-step">
@@ -171,6 +218,7 @@ import card from './main-make-up/card'
 export default {
   data () {
     return {
+      labaData: [],
       activeLabel: '001003',
       title: '办事工具',
       notice1: [],
@@ -218,7 +266,14 @@ export default {
       login: [
         { name: '登录', url: require('@/assets/image/home/main1.png'), jump: 'login' },
         { name: '注册', url: require('@/assets/image/home/main2.png'), jump: 'register' },
-        { name: '广东政务服务网', url: require('@/assets/image/home/main3.png'), jump: 'guang' },
+        // { name: '广东政务服务网', url: require('@/assets/image/home/main3.png'), jump: 'guang' },
+      ],
+
+      server: [
+        { name: '服务指南', url: require('@/assets/image/home/server1.png'), id: "008", eng: "FWZN", },
+        { name: '交易流程', url: require('@/assets/image/home/server2.png'), id: "016", eng: "JYLC", },
+        { name: '业务咨询', url: require('@/assets/image/home/server3.png'), id: "000004", },
+        { name: '投诉举报', url: require('@/assets/image/home/server4.png'), id: "000005", },
       ],
       logoDataTop: [
         { name: '政府采购', url: require('@/assets/image/home/push1.png') },
@@ -230,7 +285,7 @@ export default {
         { name: '互认平台登录', url: require('@/assets/image/home/push5.png') },
         { name: '中介服务超市', url: require('@/assets/image/home/push6.png') },
         { name: '近期开标', url: require('@/assets/image/home/push7.png') },
-        { name: '工作人员登录', url: require('@/assets/image/home/push8.png') },
+        { name: '广东省政务服务网', url: require('@/assets/image/home/push8.png') },
       ],
       loading1: false,
       i: 0,
@@ -248,6 +303,7 @@ export default {
   created () {
     this.getTree()
     this.getList(this.activeLabel)
+    this.getLaba()
     this.getBanner()
 
 
@@ -256,6 +312,47 @@ export default {
 
   },
   methods: {
+    getLaba (id) {
+
+      this.$get(
+        '/ords/epfcms/cmsItem/queryItemNewNotice',
+        {}
+      ).then(res => {
+        let data = res.items
+        let arr = []
+        let result = []
+        if (!data) {
+          return
+        }
+        for (let i = 0; i < data.length; i++) {
+          arr.push(data[i])
+          if (arr.length === 3) {
+            result.push(arr)
+            arr = []
+          }
+        }
+        this.labaData = result
+      })
+    },
+
+    serverJump (item) {
+
+
+      let params = {
+        path: "/notice",
+        query: {
+          name: item.name,
+          index: "6",
+          id: item.id,
+          eng: item.eng,
+        },
+      };
+      this.$store.commit("add_tabs", params);
+      this.$router.push(params);
+    },
+    people () {
+      window.open('http://121.11.160.122:9002/sso/ssosysuser/ssologin.html?netType=1')
+    },
     getTabsHead () {
 
     },
@@ -279,8 +376,8 @@ export default {
           this.$store.commit('add_tabs', params)
           this.$router.push('/bidOpening')
           break;
-        case '内部登录':
-          window.open('http://121.11.160.122:9002/sso/ssosysuser/ssologin.html?netType=1')
+        case '广东省政务服务网':
+          window.open('http://www.gdzwfw.gov.cn/portal/index')
           break;
       }
     },
@@ -309,12 +406,6 @@ export default {
         case 'register':
           window.open('http://121.11.160.122:9002/sso/ssosysuser/registBidder.html?returnUrl=http://121.11.160.122:9002/sso/ssosysuser/ssologin.html')
           break;
-        case 'guang':
-
-          window.open('http://www.gdzwfw.gov.cn/portal/index')
-
-          break;
-
       }
     },
     jump () {
@@ -523,21 +614,12 @@ export default {
 .second-step {
   height: 222px;
   overflow: hidden;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .logo-text {
-  width: 220px;
-  background: #eaefff;
-  font-weight: bold;
-  color: #3854b8;
-  font-size: 16px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  padding: 0 54px;
-  line-height: 25px;
-  position: relative;
+  width: 234px;
+  cursor: pointer;
 }
 .logo-text::after {
   /* #eaefff; */
@@ -574,19 +656,7 @@ export default {
 .logo-one > div {
   text-align: center;
 }
-.logo-one:hover {
-  background-color: #3753b7;
-  color: #fff;
-}
 
-.logo-one.four:hover {
-  background-color: #2989c7;
-  color: #fff;
-}
-.logo-one.five:hover {
-  background-color: #4779e3;
-  color: #fff;
-}
 .logon-one-text {
   margin: 14px;
 }
@@ -610,6 +680,75 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: #fff;
+}
+.logo-one.one:hover {
+  background: #526cfc;
+}
+.logo-one.two:hover {
+  background: #ff6c22;
+}
+.logo-one.three:hover {
+  background: #6c4afb;
+}
+.logo-one.four:hover {
+  background: #46ccb4;
+}
+
+.logo-one.five:hover {
+  background: #1e84c8;
+}
+.logo-one.six:hover {
+  background: #487ae4;
+}
+.logo-one.seven:hover {
+  background: #f6882c;
+}
+.logo-one.eight:hover {
+  background: #4c90c8;
+}
+.gd {
+  background: url("../../assets/image/home/main3.png") center center no-repeat;
+  flex-wrap: wrap;
+  align-items: center;
+}
+/* .gd:hover {
+  background: url("../../assets/image/home/main3B.png") center center no-repeat;
+} */
+.server-one {
+  width: 50%;
+  height: 75px;
+}
+.server-text {
+  color: #fff;
+}
+.new-step {
+  width: 1200px;
+  height: 80px;
+  background: linear-gradient(0deg, #2b9bf1 0%, #63bafd 100%);
+  margin-top: 10px;
+}
+.laba {
+  width: 75px;
+  height: 80px;
+}
+
+.laba-content {
+  padding: 5px 0;
+  line-height: 21px;
+  padding-right: 30px;
+  color: #ffffff;
+  font-size: 12px;
+  width: calc(100% - 75px);
+}
+.write-pointer {
+  width: 6px;
+  height: 6px;
+  background: #ffffff;
+  border-radius: 50%;
+  display: inline-block;
+}
+.my-date {
+  margin-left: auto;
 }
 </style>
 <style>

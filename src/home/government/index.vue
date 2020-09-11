@@ -9,7 +9,7 @@
         <div class="push-top display align">
           <div class="logo-one"
                v-for="(item,index) in logoDataTop"
-               :class="{'active':activeLogo.slice(0,3)===item.no.slice(0,3)}"
+               :class="{'active':activeLogo.slice(0,3)===item.no.slice(0,3),'one':index===0,'two':index===1,'three':index===2,'four':index===3}"
                :key="index"
                @click="logoClick(item)">
             <div>
@@ -712,11 +712,34 @@ export default {
   background-color: #3753b7;
   color: #fff;
 } */
-.logo-one.active {
-  background-color: #3753b7;
+.logo-one.one.active {
+  background-color: #526cfc;
   color: #fff;
 }
-
+.logo-one.two.active {
+  background-color: #6c4afb;
+  color: #fff;
+}
+.logo-one.three.active {
+  background-color: #ff6c22;
+  color: #fff;
+}
+.logo-one.four.active {
+  background-color: #46ccb4;
+  color: #fff;
+}
+/* .logo-one.two .one {
+  background: #526cfc;
+}
+.logo-one.two {
+  background: #ff6c22;
+}
+.logo-one.three {
+  background: #6c4afb;
+}
+.logo-one.four {
+  background: #46ccb4;
+} */
 .logon-one-text {
   margin: 14px;
 }

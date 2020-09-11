@@ -1,8 +1,41 @@
 <template>
-  <div>
-    <div id="mapChart"
-         ref="mapChart"
-         style="width:100%;height:600px;"></div>
+
+  <div class="cityMap">
+    <div class="area display">
+
+      <div id="mapChart"
+           ref="mapChart"
+           class="mapChart"></div>
+      <div class="phone">
+        <el-scrollbar style="height:100%">
+          <div class="phone-contain">
+
+            <div class="phone-one"
+                 v-for="(item,index) in data"
+                 :key="index">
+              <div class="title">
+                财务部
+              </div>
+              <div class="content">
+                <div>
+                  <span>电话：</span>
+                  <span>1234567</span>
+                </div>
+                <div>
+                  <span>电话：</span>
+                  <span>1234567</span>
+                </div>
+                <div>
+                  <span>电话：</span>
+                  <span>1234567</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </el-scrollbar>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -13,6 +46,7 @@ export default {
   data () {
     return {
       chart: null,
+      data: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
       mapCode: '',
       // pro: {
       //   揭阳市: '../../../static/map/json/province/445200.json',
@@ -239,4 +273,61 @@ export default {
   },
 }
 </script>
-<style></style>
+<style scoped>
+.cityMap {
+  margin-bottom: 20px;
+}
+.mapChart {
+  width: 800px;
+  height: 630px;
+
+  border: 1px solid #e5e5e5;
+  border-top: 2px solid #3854b8;
+}
+
+.phone {
+  width: 380px;
+  height: 630px;
+  border: 1px solid #e5e5e5;
+  margin-left: 20px;
+  border-top: 2px solid #3854b8;
+}
+
+.phone-one {
+  background: #ffffff;
+  border-top: 1px solid #e5e5e5;
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.phone-one:first-child {
+  border-top: none;
+}
+.phone-contain {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.title {
+  height: 45px;
+  line-height: 45px;
+  padding-left: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333333;
+  border-bottom: 1px solid #e5e5e5;
+}
+.content {
+  padding: 0 15px;
+}
+.content > div {
+  margin-top: 14px;
+}
+.content > div > span:nth-child(1) {
+  color: #656565;
+}
+</style>
+<style >
+.cityMap .el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+</style>

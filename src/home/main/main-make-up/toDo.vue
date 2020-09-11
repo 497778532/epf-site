@@ -64,22 +64,11 @@
       </div>
     </div> -->
     <div class="guide w">
-      <epf-title :title="'办事指南'"></epf-title>
+
       <div class="guide_bd">
         <div class="guide_bdleft">
-          <ul>
-            <li v-for="(item,index) in toToData"
-                :key="index"
-                @mouseover="over (item,index) "
-                @mouseout="out(item,index)"
-                @click="jump(item)">
-              <div>
-                <img :src="item.url"
-                     alt />
-                <p>{{item.name}}</p>
-              </div>
-            </li>
-          </ul>
+          <img src="@/assets/image/home/mapLeft.png"
+               alt="">
         </div>
         <div class="guide_bdright"
              @click="toMap">
@@ -222,7 +211,7 @@ i {
 }
 .tran_bd {
   display: flex;
-  margin: 20px 0;
+  margin: 20px 0 10px 0;
 }
 .tran_box {
   width: 32%;
@@ -310,47 +299,17 @@ i {
   font-size: 20px;
 }
 .guide_bd {
-  margin: 20px 0px;
+  margin: 20px 0 10px 0;
   display: flex;
 }
 .guide_bdleft {
-  width: 75%;
-}
-.guide_bdleft ul {
-  display: flex;
-}
-.guide_bdleft li {
-  width: 25%;
-  height: 240px;
-  margin-right: 10px;
-  background-color: #f7f7fb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  width: 862px;
 }
 
-.guide_bdleft li:hover {
-  color: #ffffff;
-  background-color: #3854b8;
-}
-.guide_bdleft img {
-  width: 72px;
-  height: 72px;
-}
-.guide_bdleft div {
-  text-align: center;
-}
-.guide_bdleft a {
-  color: #ffffff;
-}
-.guide_bdleft p {
-  margin-top: 20px;
-}
 .guide_bdright {
-  width: 25%;
+  width: 319px;
   height: 240px;
-  margin-left: 15px;
+  margin-left: 19px;
   background-color: #f7f8fb;
 }
 /* 尾部开始 */

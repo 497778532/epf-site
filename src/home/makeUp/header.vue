@@ -93,7 +93,7 @@ export default {
         { name: '资料下载', path: '/notice', query: { index: '3', id: '007002', name: '政府采购' }, },
         { name: '诚信体系', url: 'http://xywz.jieyang.gd.cn/' },
         { name: '操作手册', path: '/notice', query: { index: '4', id: '015001', name: '政府采购' }, },
-        { name: '服务咨询', path: '/phone', query: {} },
+        { name: '服务咨询', path: '/cityMap', query: {} },
         // { name: '操作手册', path: '/notice', query: { index: 5, id: '007002', name: '政府采购' }, top: 0 },
       ],
       navActive: '首页'
