@@ -81,11 +81,11 @@ export default {
     getData (type) {
 
       this.$get(
-        '/ords/epfcms/param/queryParamAllByNo/' + type,
+        "/ords/epfcms/param/queryParamAllByNo/" + type,
         {}
       ).then(res => {
         if (!res) {
-          return
+          return;
         }
         this.data = res[0]
 
